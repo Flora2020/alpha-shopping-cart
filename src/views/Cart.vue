@@ -1,13 +1,24 @@
 <template>
-  <Footer />
+  <div class="container">
+    <h1>結帳</h1>
+    <div class="row">
+      <div class="col-6">
+        <div class="step">
+          <StepAddress />
+        </div>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-5"></div>
+    </div>
+  </div>
 </template>
 
 <script>
-import Footer from '../components/Footer'
+import StepAddress from '../components/StepAddress.vue'
 
 export default {
   components: {
-    Footer
+    StepAddress
   }
 }
 </script>
@@ -16,6 +27,14 @@ export default {
 <style >
 html,
 body {
-  background: #f6f7f8;
+  background: #ffffff;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #2a2a2a;
+}
+h1 {
+  margin: 50px 0;
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
 }
 </style>
