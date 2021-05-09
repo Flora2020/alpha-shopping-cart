@@ -8,17 +8,21 @@
         </div>
       </div>
       <div class="col-1"></div>
-      <div class="col-5"></div>
+      <div class="col-5">
+        <ShoppingCart />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import StepAddress from '../components/StepAddress.vue'
+import ShoppingCart from '../components/ShoppingCart.vue'
 
 export default {
   components: {
-    StepAddress
+    StepAddress,
+    ShoppingCart
   }
 }
 </script>
