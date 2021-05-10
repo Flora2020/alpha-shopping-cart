@@ -15,9 +15,9 @@
             <div class="cart-item-info ps-3">
               <p class="mb-3">{{ good.name }}</p>
               <div class="count-box d-flex justify-content-between">
-                <MinusButton @click.native="onClickMinus(good.id)" />
+                <MinusButton @click.native="onClickMinus(good.id - 1)" />
                 <div class="count" v-text="good.count"></div>
-                <PlusButton @click.native="onClickPlus(good.id)" />
+                <PlusButton @click.native="onClickPlus(good.id - 1)" />
               </div>
             </div>
           </div>
@@ -59,41 +59,27 @@ export default {
     MinusButton
   },
 
-  data () {
-    return {
-      subtotal: 0,
-      goods: [
-        { id: 0, name: '破壞補丁修身牛仔褲', price: 3999, img: 'https://i.imgur.com/vkTyol5.png', count: 0 },
-        { id: 1, name: '刷色直筒牛仔褲', price: 1299, img: 'https://i.imgur.com/NlkmoSk.png', count: 0 },
-      ]
+  props: {
+    subtotal: {
+      type: Number,
+      required: true
+    },
+
+    goods: {
+      type: Array,
+      required: true
     }
   },
 
   methods: {
-    onClickPlus (index) {
-      this.goods[index].count++
-      this.plusSubtotal(index)
+    onClickPlus (goodIndex) {
+      this.$emit('after-click-plus', goodIndex)
       return
     },
 
-    onClickMinus (index) {
-      this.goods[index].count--
-      if (this.goods[index].count < 0) {
-        this.goods[index].count = 0
-      }
-      this.minusSubtotal(index)
-    },
-
-    plusSubtotal (index) {
-      this.subtotal += this.goods[index].price
-    },
-
-    minusSubtotal (index) {
-      console.log('minus!')
-      this.subtotal -= this.goods[index].price
-      if (this.subtotal < 0) {
-        this.subtotal = 0
-      }
+    onClickMinus (goodIndex) {
+      this.$emit('after-click-minus', goodIndex)
+      return
     }
   }
 }
@@ -129,7 +115,6 @@ h4 {
 }
 
 .cart-details {
-  /* height: 32px; */
   margin: 32px 0 0;
   padding-top: 20px;
   border-top: 1px solid #f0f0f5;
