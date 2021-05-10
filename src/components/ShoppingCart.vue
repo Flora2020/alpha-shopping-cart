@@ -31,7 +31,14 @@
       <div class="col-12">
         <div class="cart-details d-flex justify-content-between">
           <div class="cart-details-left">運費</div>
-          <div class="cart-details-right">免費</div>
+          <div class="cart-details-right">
+            {{
+              shippingFee === 0
+                ? "免費"
+                : "$" +
+                  shippingFee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }}
+          </div>
         </div>
       </div>
       <div class="col-12">
@@ -60,13 +67,18 @@ export default {
   },
 
   props: {
-    subtotal: {
+    goods: {
+      type: Array,
+      required: true
+    },
+
+    shippingFee: {
       type: Number,
       required: true
     },
 
-    goods: {
-      type: Array,
+    subtotal: {
+      type: Number,
       required: true
     }
   },

@@ -30,7 +30,7 @@
     </div>
     <div class="address">
       <h3>寄送地址</h3>
-      <form class="row g-3" @submit.prevent.stop="saveStorage">
+      <form class="row g-3" @submit.prevent.stop="saveReceiver">
         <div class="col-4">
           <label for="title" class="form-label">稱謂</label>
           <select v-model="title" name="title" id="title" class="form-select">
@@ -99,7 +99,7 @@
         <hr />
         <div class="col-4"></div>
         <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-4 p-0">
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-next">下一步 →</button>
           </div>
@@ -110,9 +110,14 @@
 </template>
 
 <script>
-const STORAGE_KEY = 'alpha-shopping-cart'
-
 export default {
+  props: {
+    STORAGE_KEY: {
+      type: String,
+      required: true
+    }
+  },
+
   data () {
     return {
       title: '先生',
@@ -148,17 +153,33 @@ export default {
     }
   },
 
+  created () {
+    const data = JSON.parse(localStorage.getItem(this.STORAGE_KEY))
+    if (!data || !data.receiver) { return }
+    const { title, name, phone, email, city, address } = data.receiver
+    this.title = title
+    this.name = name
+    this.phone = phone
+    this.email = email
+    this.city = city
+    this.address = address
+  },
+
   methods: {
-    saveStorage () {
+    saveReceiver () {
       const data = {
-        title: this.title,
-        name: this.name,
-        phone: this.phone,
-        email: this.email,
-        city: this.city,
-        address: this.address
+        receiver: {
+          title: this.title,
+          name: this.name,
+          phone: this.phone,
+          email: this.email,
+          city: this.city,
+          address: this.address
+        }
       }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data))
+
+      this.$emit('after-click-step-shipping')
     }
   }
 }
