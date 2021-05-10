@@ -30,7 +30,7 @@
     </div>
     <div class="address">
       <h3>寄送地址</h3>
-      <form class="row g-3" method="POST">
+      <form class="row g-3" @submit.prevent.stop="saveStorage">
         <div class="col-4">
           <label for="title" class="form-label">稱謂</label>
           <select v-model="title" name="title" id="title" class="form-select">
@@ -101,13 +101,7 @@
         <div class="col-4"></div>
         <div class="col-4">
           <div class="d-grid gap-2">
-            <button
-              type="submit"
-              class="btn btn-next"
-              @click.prevent.stop="saveStorage"
-            >
-              下一步 →
-            </button>
+            <button type="submit" class="btn btn-next">下一步 →</button>
           </div>
         </div>
       </form>
