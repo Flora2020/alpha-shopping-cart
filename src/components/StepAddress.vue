@@ -111,7 +111,6 @@
 
 <script>
 const STORAGE_KEY = 'alpha-shopping-cart'
-// import { v4 as uuidv4 } from 'uuid'
 
 export default {
   data () {
@@ -151,7 +150,6 @@ export default {
 
   methods: {
     saveStorage () {
-      console.log('saveStorage')  //測試完可刪
       const data = {
         title: this.title,
         name: this.name,
@@ -239,14 +237,12 @@ export default {
 .progress-done {
   width: 5vw;
   height: 3px;
-  /* margin: 0 3.5vw; */
   background: #2a2a2a;
 }
 
 .progress-undone {
   width: 5vw;
   height: 3px;
-  /* margin: 0 3.5vw; */
   background: #afb1bd;
 }
 
@@ -266,6 +262,5 @@ hr {
   width: 100%;
   background: #f67599;
   color: #ffffff;
-  /* outline: 3px solid pink; */
 }
 </style>
